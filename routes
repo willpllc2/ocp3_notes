@@ -1,0 +1,14 @@
+# Generate private key
+$ openssl genrsa -out my_app.key 2048
+
+# Generate CSR
+$ openssl req -new -key my_app.key -out my_app.csr
+
+# Create the cert
+$ openssl x509 -req -days 365 -in my_app.csr -signkey my_app.key -out my_app.crt
+
+# Create edge route
+$ oc create route edge --service=test --hostname=test.apps.example.com --key=my_app.key --cert=my_app.crt
+
+$ oc get routes
+$ oc get route/test -o yaml
