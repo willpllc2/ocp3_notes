@@ -1,0 +1,9 @@
+/* what tag versions of php are available */
+$ oc describe is php -n openshift
+
+/* create an php app */
+oc new-app --name=test -i php:5.6 http://github.com/a_test/php-test
+
+/* are the pods running */
+$ oc get pods -o wide
+$ oc logs test-1-build
