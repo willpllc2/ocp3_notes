@@ -1,0 +1,8 @@
+/* create an sa */
+$ oc create serviceaccount rootsa
+
+/* add anyuid to the sa */
+$ oc adm policy add-scc-to-user anyuid -z rootsa
+
+/* Add the serviceAccount to the dc */
+$ oc patch dc/myapp --patch '{"spec":{"template":{"spec":{"serviceAccountName":"rootsa"}}}}'
