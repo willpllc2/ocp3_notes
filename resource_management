@@ -1,0 +1,30 @@
+/* limit range example*/
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: proj-limit
+spec:
+  limits:
+    - type: container
+      default:
+        cpu: 500m
+        
+        
+/* quota example */
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: proj-quota
+spec:
+  hard:
+    cpu: 1500m
+
+/* check limits */
+$ oc get limitrange
+
+/* check quotas */
+$ oc get quota
+$ oc get resourcequota --list-all-quotas
+
+/* set quota for dc */
+$ oc set resources dc test --requests=memory=2Gi
