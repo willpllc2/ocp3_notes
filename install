@@ -1,0 +1,12 @@
+# yum install atomic-openshift-utils
+
+$ ansible-playbook /usr/share/ansible/openshift-ansible/playbooks/prerequisites.yml -vv
+
+$ ansible-playbook /usr/share/ansible/openshift-ansible/playbooks/deplpoy_cluster.yml -vv
+
+$ ssh master1
+
+$ sudo su -
+
+# oc adm policy add-cluster-role-to-user cluster-admin admin
+
