@@ -1,0 +1,17 @@
+
+/* Upload to local docker registry */
+TOKEN=$(oc whoami -t)
+
+docker login -n developer -p ${TOKEN} docker-registry-default.apps.lab.example.com
+
+
+/* if getting Certificate signed by unknown authority */
+$ scp registry.crt each_node:/etc/pki/ca-trust/source/anchors/registry.host.local.crt
+
+/* run on each node */
+# update-ca-trust
+# systemctl restart docker
+
+/* what images are in the registry */
+$ docker-registry-cli registry.host.local search webconsole ssl
+
