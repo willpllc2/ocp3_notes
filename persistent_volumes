@@ -1,0 +1,29 @@
+/* example yaml */
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: postgres-volume
+spec:
+  capacity:
+    storage: 3Gi
+  accessModes:
+    - ReadWriteMany
+  nfs:
+    path: /var/export/postgres
+    server: nfs1.host.local
+  persistentVolumeReclaimPolicy: Recycle
+  
+
+/* create the pv */
+$ oc create -f pv.yaml
+$ oc get pv
+
+/* create the pvc */
+$ oc create -f pvc.yml
+$ oc get pvc
+
+$ set the dc to use the volume
+$ oc get pod postgres -o yaml
+$ oc set volume dc/postgres --add --overwrite --name=postgres-volume-1 -t pvc --claim-name=postgres-pvc --claim-size=10Gi --claim-mode='ReadWriteMany'
+$ oc get pod postgres -o yaml
+  
